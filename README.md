@@ -6,7 +6,6 @@ jQuery UI Layout
 - Updated responsive features to be more dynamic with size control and dynamic construction variations.
 - Updated the demo pages to reflect a true representation of JQuery 3 and JQuery UI 1.12
 - Allows for elements to be specified as toggle contents as well as the pre-existing html. These elements are moved to the toggle location and various classes are applied in the default manner.
-- New Demo Site with Updated demos and interactions 
 
 1.4.4 - 1.5.12
 ----------------
