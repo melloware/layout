@@ -1,9 +1,9 @@
 /*
  * Default Layout Theme
  *
- * Created for jquery.layout 
+ * Created for jquery.layout
  *
- * Copyright (c) 2010 
+ * Copyright (c) 2010
  *   Fabrizio Balliano (http://www.fabrizioballiano.net)
  *   Kevin Dalman (http://allpro.net)
  *
@@ -107,7 +107,7 @@ body {
     opacity: 1.00; /* on-hover, show the resizer-bar normally */
     filter:  alpha(opacity=100);
 }
-/* sliding resizer - add 'outside-border' to resizer on-hover 
+/* sliding resizer - add 'outside-border' to resizer on-hover
  * this sample illustrates how to target specific panes and states */
 .ui-layout-resizer-north-sliding-hover	{ border-bottom-width:	1px; }
 .ui-layout-resizer-south-sliding-hover	{ border-top-width:		1px; }
@@ -156,7 +156,7 @@ body {
 
 /*
  *	PANE-MASKS
- *	these styles are hard-coded on mask elems, but are also 
+ *	these styles are hard-coded on mask elems, but are also
  *	included here as !important to ensure will overrides any generic styles
  */
 .ui-layout-mask {
@@ -195,7 +195,7 @@ iframe.ui-layout-mask {}	/* extra mask for objects/applets */
         bottom:		auto !important;
         left:		auto !important;
         right:		auto !important;
-        /* only IE6 has container width & height set by Layout 
+        /* only IE6 has container width & height set by Layout
         _width:		auto !important;
         _height:	auto !important;
     }*/
@@ -223,11 +223,11 @@ iframe.ui-layout-mask {}	/* extra mask for objects/applets */
 
 
 /*
-The following hack is useful if you plan to use seamlessly jQuery UI Layout plugin (https://github.com/allpro/layout) 
+The following hack is useful if you plan to use seamlessly jQuery UI Layout plugin (https://github.com/allpro/layout)
 and Bootstrap components, like Dropdown, Popover, Tooltip;
 
 Otherwise you have to use special utiliy methods, like allowOverflow( elem_or_pane ), resetOverflow( elem_or_pane )
-everytime you want to show/hide each and every component that may oveflow the pane. 
+everytime you want to show/hide each and every component that may oveflow the pane.
 
 */
 

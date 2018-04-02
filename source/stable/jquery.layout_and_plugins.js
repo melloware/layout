@@ -1,6 +1,6 @@
 /**
  * @preserve
- * jquery.layout 1.6.0
+ * jquery.layout 1.6.2
  * $Date: 2018-01-27 08:00:00 (Sat, 29 November 2014) $
  * $Rev: 1.0.6.0 $
  *
@@ -21,6 +21,7 @@
  * History
  * 2016/28/10 - Added responsiveness - marc magon
  * 2018/01/27 - Updated the toggler class and responsive properties
+ * 2018/04/02 - Switch unbinds to .off() as recommended
  */
 
 /* JavaDoc Info: http://code.google.com/closure/compiler/docs/js-for-compiler.html
@@ -57,7 +58,7 @@
                 function g(f) {
                     return f;
                 }
-                 // compiler hack
+                // compiler hack
             }
         ;
 
@@ -1226,7 +1227,7 @@
                     function g(f) {
                         return f;
                     }
-                     // compiler hack
+                    // compiler hack
                 }
 
 
@@ -3075,8 +3076,8 @@
                  */
                 , destroy = function (evt_or_destroyChildren, destroyChildren) {
                     // UNBIND layout events and remove global object
-                    $(window).unbind("." + sID);  // resize & unload
-                    $(document).unbind("." + sID); // keyDown (hotkeys)
+                    $(window).off("." + sID);  // resize & unload
+                    $(document).off("." + sID); // keyDown (hotkeys)
 
                     if (typeof evt_or_destroyChildren === "object")
                     // stopPropagation if called by trigger("layoutdestroy") - use evtPane utility
@@ -3092,7 +3093,7 @@
                         .removeData("layout")
                         .removeData("layoutContainer")
                         .removeClass(options.containerClass)
-                        .unbind("." + sID) // remove ALL Layout events
+                        .off("." + sID) // remove ALL Layout events
                     ;
 
                     // remove all mask elements that have been created
@@ -3215,7 +3216,7 @@
                             .removeData("layoutRole")
                             .removeData("layoutEdge")
                             .removeData("autoHidden") // in case set
-                            .unbind("." + sID) // remove ALL Layout events
+                            .off("." + sID) // remove ALL Layout events
                         // TODO: remove these extra unbind commands when jQuery is fixed
                         //.unbind("mouseenter"+ sID)
                         //.unbind("mouseleave"+ sID)
@@ -4874,7 +4875,7 @@
                     // is closable is disable, then pane MUST be open!
                     if (state[pane].isClosed)
                         open(pane, false, true);
-                    $T.unbind("." + sID)
+                    $T.off("." + sID)
                         .css("visibility", hide ? "hidden" : "visible") // instead of hide(), which creates logic issues
                         .css("cursor", "default")
                         .attr("title", "");
@@ -6400,69 +6401,3 @@ jQuery.cookie = function (name, value, options) {
     }
 
 })(jQuery);
-
-
-(function ($) {
-    var _ = $.layout;
-
-// make sure the callbacks branch exists
-    if (!_.callbacks)
-        _.callbacks = {};
-
-    _.callbacks.resizePaneAccordions = function (x, ui) {
-        // may be called EITHER from layout-pane.onresize OR tabs.show
-        var $P = ui.jquery ? ui : $(ui.newPanel || ui.panel);
-        // find all VISIBLE accordions inside this pane and resize them
-        $P.find(".ui-accordion:visible").each(function () {
-            var $E = $(this);
-            if ($E.data("accordion"))  // jQuery < 1.9
-                $E.accordion("resize");
-            if ($E.data("ui-accordion")) // jQuery >= 1.9
-                $E.accordion("refresh");
-        });
-    };
-})(jQuery);
-
-
-(function ($) {
-    $.layout.callbacks.resizeDataTables = function (x, ui) {
-        // may be called EITHER from layout-pane.onresize OR tabs.show
-        var oPane = ui.jquery ? ui[0] : ui.panel;
-        // cannot resize if the pane is currently closed or hidden
-        if (!$(oPane).is(":visible"))
-            return;
-        // find all data tables inside this pane and resize them
-        $($.fn.dataTable.fnTables(true)).each(function (i, table) {
-            if ($.contains(oPane, table)) {
-                $(table).dataTable().fnAdjustColumnSizing();
-            }
-        });
-    };
-})(jQuery);
-
-
-(function ($) {
-    var _ = $.layout;
-
-// make sure the callbacks branch exists
-    if (!_.callbacks)
-        _.callbacks = {};
-
-// this callback is bound to the tabs.show event OR to layout-pane.onresize event
-    _.callbacks.resizeTabLayout = function (x, ui) {
-        // may be called EITHER from layout-pane.onresize OR tabs.show/activate
-        var $P = ui.jquery ? ui : $(ui.newPanel || ui.panel);
-        // find all VISIBLE layouts inside this pane/panel and resize them
-        $P.filter(":visible").find(".ui-layout-container:visible").addBack().each(function () {
-            var layout = $(this).data("layout");
-            if (layout) {
-                layout.options.resizeWithWindow = false; // set option just in case not already set
-                layout.resizeAll();
-            }
-        });
-    };
-})
-(jQuery);
-
-
-

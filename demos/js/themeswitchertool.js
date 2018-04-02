@@ -29,100 +29,100 @@ $.fn.themeswitcher = function( settings ) {
 	// TODO: download all the preview images and host locally
 	var switcherpane = $([
 		'<div class="jquery-ui-themeswitcher"><div id="themeGallery"><ul>'
-	,		'<li><a href="/lib/css/themes/ui-lightness/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_ui_light.png" alt="UI Lightness" title="UI Lightness" />'
+	,		'<li><a href="css/themes/ui-lightness/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_ui_light.png" alt="UI Lightness" title="UI Lightness" />'
 	,			'<span class="themeName">UI lightness</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/ui-darkness/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_ui_dark.png" alt="UI Darkness" title="UI Darkness" />'
+	,		'<li><a href="css/themes/ui-darkness/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_ui_dark.png" alt="UI Darkness" title="UI Darkness" />'
 	,			'<span class="themeName">UI darkness</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/smoothness/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_smoothness.png" alt="Smoothness" title="Smoothness" />'
+	,		'<li><a href="css/themes/smoothness/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_smoothness.png" alt="Smoothness" title="Smoothness" />'
 	,			'<span class="themeName">Smoothness</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/start/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_start_menu.png" alt="Start" title="Start" />'
+	,		'<li><a href="css/themes/start/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_start_menu.png" alt="Start" title="Start" />'
 	,			'<span class="themeName">Start</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/redmond/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_windoze.png" alt="Redmond" title="Redmond" />'
+	,		'<li><a href="css/themes/redmond/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_windoze.png" alt="Redmond" title="Redmond" />'
 	,			'<span class="themeName">Redmond</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/sunny/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_sunny.png" alt="Sunny" title="Sunny" />'
+	,		'<li><a href="css/themes/sunny/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_sunny.png" alt="Sunny" title="Sunny" />'
 	,			'<span class="themeName">Sunny</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/overcast/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_overcast.png" alt="Overcast" title="Overcast" />'
+	,		'<li><a href="css/themes/overcast/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_overcast.png" alt="Overcast" title="Overcast" />'
 	,			'<span class="themeName">Overcast</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/le-frog/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_le_frog.png" alt="Le Frog" title="Le Frog" />'
+	,		'<li><a href="css/themes/le-frog/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_le_frog.png" alt="Le Frog" title="Le Frog" />'
 	,			'<span class="themeName">Le Frog</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/flick/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_flick.png" alt="Flick" title="Flick" />'
+	,		'<li><a href="css/themes/flick/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_flick.png" alt="Flick" title="Flick" />'
 	,			'<span class="themeName">Flick</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/pepper-grinder/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_pepper_grinder.png" alt="Pepper Grinder" title="Pepper Grinder" />'
+	,		'<li><a href="css/themes/pepper-grinder/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_pepper_grinder.png" alt="Pepper Grinder" title="Pepper Grinder" />'
 	,			'<span class="themeName">Pepper Grinder</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/eggplant/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_eggplant.png" alt="Eggplant" title="Eggplant" />'
+	,		'<li><a href="css/themes/eggplant/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_eggplant.png" alt="Eggplant" title="Eggplant" />'
 	,			'<span class="themeName">Eggplant</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/dark-hive/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_dark_hive.png" alt="Dark Hive" title="Dark Hive" />'
+	,		'<li><a href="css/themes/dark-hive/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_dark_hive.png" alt="Dark Hive" title="Dark Hive" />'
 	,			'<span class="themeName">Dark Hive</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/cupertino/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_cupertino.png" alt="Cupertino" title="Cupertino" />'
+	,		'<li><a href="css/themes/cupertino/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_cupertino.png" alt="Cupertino" title="Cupertino" />'
 	,			'<span class="themeName">Cupertino</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/south-street/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_south_street.png" alt="South St" title="South St" />'
+	,		'<li><a href="css/themes/south-street/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_south_street.png" alt="South St" title="South St" />'
 	,			'<span class="themeName">South Street</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/blitzer/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_blitzer.png" alt="Blitzer" title="Blitzer" />'
+	,		'<li><a href="css/themes/blitzer/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_blitzer.png" alt="Blitzer" title="Blitzer" />'
 	,			'<span class="themeName">Blitzer</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/humanity/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_humanity.png" alt="Humanity" title="Humanity" />'
+	,		'<li><a href="css/themes/humanity/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_humanity.png" alt="Humanity" title="Humanity" />'
 	,			'<span class="themeName">Humanity</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/hot-sneaks/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_hot_sneaks.png" alt="Hot Sneaks" title="Hot Sneaks" />'
+	,		'<li><a href="css/themes/hot-sneaks/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_hot_sneaks.png" alt="Hot Sneaks" title="Hot Sneaks" />'
 	,			'<span class="themeName">Hot sneaks</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/excite-bike/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_excite_bike.png" alt="Excite Bike" title="Excite Bike" />'
+	,		'<li><a href="css/themes/excite-bike/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_excite_bike.png" alt="Excite Bike" title="Excite Bike" />'
 	,			'<span class="themeName">Excite Bike</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/vader/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_black_matte.png" alt="Vader" title="Vader" />'
+	,		'<li><a href="css/themes/vader/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_black_matte.png" alt="Vader" title="Vader" />'
 	,			'<span class="themeName">Vader</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/dot-luv/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_dot_luv.png" alt="Dot Luv" title="Dot Luv" />'
+	,		'<li><a href="css/themes/dot-luv/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_dot_luv.png" alt="Dot Luv" title="Dot Luv" />'
 	,			'<span class="themeName">Dot Luv</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/mint-choc/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_mint_choco.png" alt="Mint Choc" title="Mint Choc" />'
+	,		'<li><a href="css/themes/mint-choc/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_mint_choco.png" alt="Mint Choc" title="Mint Choc" />'
 	,			'<span class="themeName">Mint Choc</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/black-tie/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_black_tie.png" alt="Black Tie" title="Black Tie" />'
+	,		'<li><a href="css/themes/black-tie/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_black_tie.png" alt="Black Tie" title="Black Tie" />'
 	,			'<span class="themeName">Black Tie</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/trontastic/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_trontastic.png" alt="Trontastic" title="Trontastic" />'
+	,		'<li><a href="css/themes/trontastic/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_trontastic.png" alt="Trontastic" title="Trontastic" />'
 	,			'<span class="themeName">Trontastic</span>'
 	,		'</a></li>'
-	,		'<li><a href="/lib/css/themes/swanky-purse/jquery-ui.css">'
-	,			'<img src="/lib/css/themeswitcher/theme_30_swanky_purse.png" alt="Swanky Purse" title="Swanky Purse" />'
+	,		'<li><a href="css/themes/swanky-purse/jquery-ui.css">'
+	,			'<img src="css/themeswitcher/theme_30_swanky_purse.png" alt="Swanky Purse" title="Swanky Purse" />'
 	,			'<span class="themeName">Swanky Purse</span>'
 	,		'</a></li>'
 	,	'</ul></div></div>'
@@ -178,7 +178,7 @@ $.fn.themeswitcher = function( settings ) {
 		var cssLink = $('<link href="'+locStr+'" type="text/css" rel="Stylesheet" class="ui-theme" />');
 		$("head").append(cssLink);
 
-		if ( $("link.ui-theme").size() > 3 )
+		if ( $("link.ui-theme").length > 3 )
 			$("link.ui-theme:first").remove();
 	}	
 	
@@ -188,7 +188,7 @@ $.fn.themeswitcher = function( settings ) {
 		fontFamily: 'Trebuchet MS, Verdana, sans-serif',
 		fontSize: '11px',
 		color: '#666',
-		background: '#eee url(/lib/css/themeswitcher/buttonbg.png) 50% 50% repeat-x',
+		background: '#eee url(css/themeswitcher/buttonbg.png) 50% 50% repeat-x',
 		border: '1px solid #ccc',
 		'-moz-border-radius': '6px',
 		'-webkit-border-radius': '6px',
@@ -232,7 +232,7 @@ $.fn.themeswitcher = function( settings ) {
 			float: 'right',
 			width: '16px',
 			height: '16px',
-			background: 'url(/lib/css/themeswitcher/icon_color_arrow.gif) 50% 50% no-repeat'
+			background: 'url(css/themeswitcher/icon_color_arrow.gif) 50% 50% no-repeat'
 		});	
 
 	//pane css
@@ -270,7 +270,7 @@ $.fn.themeswitcher = function( settings ) {
 			function(){ 
 				$(this).css({
 					'borderColor':'#555',
-					'background': 'url(/lib/css/themeswitcher/menuhoverbg.png) 50% 50% repeat-x',
+					'background': 'url(css/themeswitcher/menuhoverbg.png) 50% 50% repeat-x',
 					cursor: 'pointer'
 				}); 
 			},
@@ -388,7 +388,7 @@ $.cookie = $.cookie || function(name, value, options) {
  *
  *	Add themeswitcher tool inside a generated, positioned placeholder
  *
- *	Dependancies: /lib/js/themeswitchertool.js
+ *	Dependancies: lib/js/themeswitchertool.js
  */
 function addThemeSwitcher ( container, position ) {
 	var pos = { top: '10px', right: '10px', zIndex: 10 };
