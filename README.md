@@ -1,6 +1,12 @@
 jQuery UI Layout
 ================
 
+1.16.0 - 1.16.3
+------------------
+- Added addSlideToggle methods and addSlideToggleBtn utility
+- unbind() to off()
+
+
 1.5.12.2 - 1.16.0
 ------------------
 - Updated responsive features to be more dynamic with size control and dynamic construction variations.

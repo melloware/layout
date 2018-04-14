@@ -1,7 +1,7 @@
 /**
  * @preserve
- * jquery.layout 1.6.2
- * $Date: 2018-01-27 08:00:00 (Sat, 29 November 2014) $
+ * jquery.layout 1.6.3
+ * $Date: 2018-04-14 08:00:00
  * $Rev: 1.0.6.0 $
  *
  * Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com)
@@ -66,8 +66,8 @@
      * GENERIC $.layout METHODS - used by all layouts
      */
         $.layout = {
-            version: "1.6.0"
-            , revision: 1.6001 // eg: ver 1.4.4 = rev 1.0404 - major(n+).minor(nn)+patch(nn+)
+            version: "1.6.3"
+            , revision: 1.6003 // eg: ver 1.4.4 = rev 1.0404 - major(n+).minor(nn)+patch(nn+)
 
             // $.layout.browser REPLACES $.browser
             , browser: {} // set below
@@ -6063,6 +6063,22 @@ jQuery.cookie = function (name, value, options) {
         }
 
         /**
+         * Add a slide Toggler button for a pane
+         *
+         * @param {(string|!Object)} selector jQuery selector (or element) for button, eg: ".ui-layout-north .toggle-button"
+         * @param {string}     pane   Name of the pane the button is for: 'north', 'south', etc.
+         * @param {boolean=}   slide   true = slide-open, false = pin-open
+         */
+        , addSlideToggle: function (inst, selector, pane, slide) {
+            $.layout.buttons.get(inst, selector, pane, "slideToggle")
+                .click(function (evt) {
+                    inst.slideToggle(pane, !!slide);
+                    evt.stopPropagation();
+                });
+            return inst;
+        }
+
+        /**
          * Add a custom Open button for a pane
          *
          * @param {(string|!Object)} selector jQuery selector (or element) for button, eg: ".ui-layout-north .toggle-button"
@@ -6182,6 +6198,9 @@ jQuery.cookie = function (name, value, options) {
                 // DEPRECATED METHODS...
                 , addToggleBtn: function (selector, pane, slide) {
                     return $.layout.buttons.addToggle(inst, selector, pane, slide);
+                }
+                , addSlideToggleBtn: function (selector, pane, slide) {
+                    return $.layout.buttons.addSlideToggle(inst, selector, pane, slide);
                 }
                 , addOpenBtn: function (selector, pane, slide) {
                     return $.layout.buttons.addOpen(inst, selector, pane, slide);
