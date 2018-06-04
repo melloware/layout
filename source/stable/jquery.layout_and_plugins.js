@@ -1,8 +1,8 @@
 /**
  * @preserve
  * jquery.layout 1.6.3
- * $Date: 2018-04-14 08:00:00
- * $Rev: 1.0.6.0 $
+ * $Date: 2018-04-14 08:00:00 $
+ * $Rev: 1.0.6.2 $
  *
  * Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com)
  * Based on work by Fabrizio Balliano (http://www.fabrizioballiano.net)
@@ -58,6 +58,7 @@
                 function g(f) {
                     return f;
                 }
+
                 // compiler hack
             }
         ;
@@ -730,6 +731,7 @@
                 //Add responsiveness
                 , responsive:
                     {
+                        enabled: false,
                         when: 'md'
                         , sizes: {
                             xl: 1140,
@@ -1227,6 +1229,7 @@
                     function g(f) {
                         return f;
                     }
+
                     // compiler hack
                 }
 
@@ -3832,13 +3835,13 @@
                     if (pane === "center")
                         return; // validate
                     if (s.isClosed || s.isResizing)
-                        return; // skip if already closed OR in process of resizing
+                         // skip if already closed OR in process of resizing
                     else if (o.slideTrigger_close === "click")
                         close_NOW(); // close immediately onClick
                     else if (o.preventQuickSlideClose && s.isMoving)
-                        return; // handle Chrome quick-close on slide-open
+                         // handle Chrome quick-close on slide-open
                     else if (o.preventPrematureSlideClose && evt && $.layout.isMouseOverElem(evt, $Ps[pane]))
-                        return; // handle incorrect mouseleave trigger, like when over a SELECT-list in IE
+                         // handle incorrect mouseleave trigger, like when over a SELECT-list in IE
                     else if (evt) // trigger = mouseleave - use a delay
                     // 1 sec delay if 'opening', else .3 sec
                         timer.set(pane + "_closeSlider", close_NOW, max(o.slideDelay_close, delay));
@@ -4491,7 +4494,7 @@
                         var paneRespondedState = false;
                         var windowWidth = $(window).width();
 
-                        if ((o !== null && o !== 'undefined') && o.responsive) {
+                        if ((o !== null && o !== 'undefined') && o.responsive && o.responsive.enabled) {
                             //if(s.size >= o.responsive.sizes.lg)
                             if (windowWidth >= o.responsive.sizes.lg)
                                 if (o.responsive.when === 'lg' || o.responsive.when === 'md' || o.responsive.when === 'sm' || o.responsive.when === 'xs') {
@@ -5025,7 +5028,6 @@
                     _runCallbacks("onswap_end", pane1);
                     _runCallbacks("onswap_end", pane2);
 
-                    return;
 
                     function copy(n) { // n = pane
                         var
@@ -6061,7 +6063,6 @@ jQuery.cookie = function (name, value, options) {
                 });
             return inst;
         }
-
         /**
          * Add a slide Toggler button for a pane
          *
@@ -6420,3 +6421,69 @@ jQuery.cookie = function (name, value, options) {
     }
 
 })(jQuery);
+
+
+(function ($) {
+    var _ = $.layout;
+
+// make sure the callbacks branch exists
+    if (!_.callbacks)
+        _.callbacks = {};
+
+    _.callbacks.resizePaneAccordions = function (x, ui) {
+        // may be called EITHER from layout-pane.onresize OR tabs.show
+        var $P = ui.jquery ? ui : $(ui.newPanel || ui.panel);
+        // find all VISIBLE accordions inside this pane and resize them
+        $P.find(".ui-accordion:visible").each(function () {
+            var $E = $(this);
+            if ($E.data("accordion"))  // jQuery < 1.9
+                $E.accordion("resize");
+            if ($E.data("ui-accordion")) // jQuery >= 1.9
+                $E.accordion("refresh");
+        });
+    };
+})(jQuery);
+
+
+(function ($) {
+    $.layout.callbacks.resizeDataTables = function (x, ui) {
+        // may be called EITHER from layout-pane.onresize OR tabs.show
+        var oPane = ui.jquery ? ui[0] : ui.panel;
+        // cannot resize if the pane is currently closed or hidden
+        if (!$(oPane).is(":visible"))
+            return;
+        // find all data tables inside this pane and resize them
+        $($.fn.dataTable.fnTables(true)).each(function (i, table) {
+            if ($.contains(oPane, table)) {
+                $(table).dataTable().fnAdjustColumnSizing();
+            }
+        });
+    };
+})(jQuery);
+
+
+(function ($) {
+    var _ = $.layout;
+
+// make sure the callbacks branch exists
+    if (!_.callbacks)
+        _.callbacks = {};
+
+// this callback is bound to the tabs.show event OR to layout-pane.onresize event
+    _.callbacks.resizeTabLayout = function (x, ui) {
+        // may be called EITHER from layout-pane.onresize OR tabs.show/activate
+        var $P = ui.jquery ? ui : $(ui.newPanel || ui.panel);
+        // find all VISIBLE layouts inside this pane/panel and resize them
+        $P.filter(":visible").find(".ui-layout-container:visible").addBack().each(function () {
+            var layout = $(this).data("layout");
+            if (layout) {
+                layout.options.resizeWithWindow = false; // set option just in case not already set
+                layout.resizeAll();
+            }
+        });
+    };
+})
+(jQuery);
+
+
+
