@@ -1,6 +1,14 @@
 jQuery UI Layout
 ================
 
+1.7.0
+------------------
+ @rsprinkle      Add AMD Support,
+ 
+ @alexsielicki   Fixing issue with running under webpack with jQuery 3.3.1 and jQuery Migrate plugin
+
+Version bump for identification into AMD
+
 1.6.0 - 1.6.3
 ------------------
 - Added addSlideToggle methods and addSlideToggleBtn utility
