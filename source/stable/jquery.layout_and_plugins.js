@@ -1637,7 +1637,7 @@
                         o = options[pane];
                         s = state[pane];
 
-                        $P = $Ps[pane];
+                        var $P = $Ps[pane];
                         if (o.initHidden) {
                             hide(pane);
                         } else if (o.initClosed) {
