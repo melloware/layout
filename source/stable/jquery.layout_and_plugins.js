@@ -31,7 +31,20 @@
  * {*}   ALL types
  */
 // NOTE: For best readability, view with a fixed-width font and tabs equal to 4-chars
-
+(function (factory) 
+{
+	if (typeof define === 'function' && define.amd) 
+	{
+		// AMD. Register as anonymous module.
+		define(['jquery'], factory);
+	} 
+	else 
+	{
+		// Browser globals.
+		factory(jQuery);
+	}
+}(function(jQuery)
+{
 (function ($) {
 // alias Math methods - used a lot!
         var min = Math.min, max = Math.max, round = Math.floor, isStr = function (v) {
@@ -6488,5 +6501,6 @@ jQuery.cookie = function (name, value, options) {
 })
 (jQuery);
 
+}));
 
 
