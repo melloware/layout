@@ -6504,6 +6504,7 @@
     })
     (jQuery);
 
+  return jQuery;
 }));
 
 
