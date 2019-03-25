@@ -1,8 +1,8 @@
 /**
  * @preserve
- * jquery.layout 1.7.1
+ * jquery.layout 1.7.2
  * $Date: 2018-04-14 08:00:00 $
- * $Rev: 1.0.7.1 $
+ * $Rev: 1.0.7.2 $
  *
  * Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com)
  * Based on work by Fabrizio Balliano (http://www.fabrizioballiano.net)
@@ -25,6 +25,8 @@
  *
  * 2019/02/09 - @rsprinkle      Add AMD Support,
  *              @alexsielicki   Fixing issue with running under webpack with jQuery 3.3.1 and jQuery Migrate plugin
+ *
+ * 2019/03/25 - @rsprinkle      AMD Support - Return JQuery
  */
 
 /* JavaDoc Info: http://code.google.com/closure/compiler/docs/js-for-compiler.html
@@ -83,8 +85,8 @@
      * GENERIC $.layout METHODS - used by all layouts
      */
             $.layout = {
-                version: "1.6.3"
-                , revision: 1.6003 // eg: ver 1.4.4 = rev 1.0404 - major(n+).minor(nn)+patch(nn+)
+                version: "1.7.2"
+                , revision: 1.7002 // eg: ver 1.4.4 = rev 1.0404 - major(n+).minor(nn)+patch(nn+)
 
                 // $.layout.browser REPLACES $.browser
                 , browser: {} // set below
@@ -6504,6 +6506,7 @@
     })
     (jQuery);
 
+    return jQuery;
 }));
 
 
