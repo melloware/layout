@@ -1,8 +1,8 @@
 /**
  * @preserve
- * jquery.layout 1.7.2
- * $Date: 2018-04-14 08:00:00 $
- * $Rev: 1.0.7.2 $
+ * jquery.layout 1.7.4
+ * $Date: 2019-05-01 $
+ * $Rev: 1.0.7.4 $
  *
  * Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com)
  * Based on work by Fabrizio Balliano (http://www.fabrizioballiano.net)
@@ -61,13 +61,13 @@
                  * @param {Array.<string>} a_fn
                  */
                 , runPluginCallbacks = function (Instance, a_fn) {
-                    if ($.isArray(a_fn))
+                    if (Array.isArray(a_fn))
                         for (var i = 0, c = a_fn.length; i < c; i++) {
                             var fn = a_fn[i];
                             try {
                                 if (isStr(fn)) // 'name' of a function
                                     fn = eval(fn);
-                                if ($.isFunction(fn))
+                                if (typeof fn === "function")
                                     g(fn)(Instance);
                             } catch (ex) {
                             }
@@ -85,7 +85,7 @@
      * GENERIC $.layout METHODS - used by all layouts
      */
             $.layout = {
-                version: "1.7.2"
+                version: "1.7.4"
                 , revision: 1.7002 // eg: ver 1.4.4 = rev 1.0404 - major(n+).minor(nn)+patch(nn+)
 
                 // $.layout.browser REPLACES $.browser
@@ -1206,17 +1206,17 @@
                                         fn = eval(fn);
                                 }
                                 // execute the callback, if exists
-                                if ($.isFunction(fn)) {
+                                if (typeof fn === "function") {
                                     if (args.length)
                                         retVal = g(fn)(args[1]); // pass the argument parsed from 'list'
                                     else if (hasPane)
-                                    // pass data: pane-name, pane-element, pane-state, pane-options, and layout-name
+                                        // pass data: pane-name, pane-element, pane-state, pane-options, and layout-name
                                         retVal = g(fn)(pane, $Ps[pane], s, o, lName);
                                     else // must be a layout/container callback - pass suitable info
                                         retVal = g(fn)(Instance, s, o, lName);
                                 }
                             } catch (ex) {
-                                _log(options.errors.callbackError.replace(/EVENT/, $.trim((pane || "") + " " + lng)), false);
+                                _log(options.errors.callbackError.replace(/EVENT/, String.prototype.trim((pane || "") + " " + lng)), false);
                                 if ($.type(ex) === "string" && string.length)
                                     _log("Exception:  " + ex, false);
                             }
@@ -1316,7 +1316,7 @@
                             if (autoHide && $E.data('autoHidden') && $E.innerHeight() > 0) {
                                 $E.show().data('autoHidden', false);
                                 if (!browser.mozilla) // FireFox refreshes iframes - IE does not
-                                // make hidden, then visible to 'refresh' display after animation
+                                    // make hidden, then visible to 'refresh' display after animation
                                     $E.css(_c.hidden).css(_c.visible);
                             }
                         } else if (autoHide && !$E.data('autoHidden'))
@@ -1748,7 +1748,7 @@
                         ;
                         if ($.isPlainObject(cos))
                             cos = [cos]; // convert a hash to a 1-elem array
-                        else if (!cos || !$.isArray(cos))
+                        else if (!cos || !Array.isArray(cos))
                             return;
 
                         $.each(cos, function (idx, co) {
@@ -2270,7 +2270,7 @@
                     , getPane = function (pane) {
                         var sel = options[pane].paneSelector;
                         if (sel.substr(0, 1) === "#") // ID selector
-                        // NOTE: elements selected 'by ID' DO NOT have to be 'children'
+                            // NOTE: elements selected 'by ID' DO NOT have to be 'children'
                             return $N.find(sel).eq(0);
                         else { // class or other selector
                             var $P = $N.children(sel).eq(0);
@@ -2468,7 +2468,7 @@
                         else if (o.initHidden || o.initClosed)
                             hide(pane); // will be completely invisible - no resizer or spacing
                         else if (!s.noRoom)
-                        // make the pane visible - in case was initially hidden
+                            // make the pane visible - in case was initially hidden
                             $P.css("display", "block");
                         // ELSE setAsOpen() - called later by initHandles()
 
@@ -2477,7 +2477,7 @@
 
                         // check option for auto-handling of pop-ups & drop-downs
                         if (o.showOverflowOnHover)
-                            $P.hover(allowOverflow, resetOverflow);
+                            $P.on('hover',allowOverflow, resetOverflow);
 
                         // if manually adding a pane AFTER layout initialization, then...
                         if (state.initialized) {
@@ -2507,7 +2507,7 @@
                             if (o.triggerEventsOnLoad)
                                 _runCallbacks("onresize_end", pane);
                             else // automatic if onresize called, otherwise call it specifically
-                            // resize child - IF inner-layout already exists (created before this layout)
+                                // resize child - IF inner-layout already exists (created before this layout)
                                 resizeChildren(pane, true); // a previously existing childLayout
                         }
 
@@ -2613,10 +2613,10 @@
                                 .css(_c.resizers.cssReq).css("zIndex", options.zIndexes.resizer_normal)
                                 .css(o.applyDemoStyles ? _c.resizers.cssDemo : {}) // add demo styles
                                 .addClass(rClass + " " + rClass + _pane)
-                                .hover(addHover, removeHover) // ALWAYS add hover-classes, even if resizing is not enabled - handle with CSS instead
-                                .hover(onResizerEnter, onResizerLeave) // ALWAYS NEED resizer.mouseleave to balance toggler.mouseenter
-                                .mousedown($.layout.disableTextSelection) // prevent text-selection OUTSIDE resizer
-                                .mouseup($.layout.enableTextSelection)  // not really necessary, but just in case
+                                .on('hover',addHover, removeHover) // ALWAYS add hover-classes, even if resizing is not enabled - handle with CSS instead
+                                .on('hover',onResizerEnter, onResizerLeave) // ALWAYS NEED resizer.mouseleave to balance toggler.mouseenter
+                                .on('mouseup',$.layout.disableTextSelection) // prevent text-selection OUTSIDE resizer
+                                .on('mouseup',$.layout.enableTextSelection)  // not really necessary, but just in case
                                 .appendTo($N) // append DIV to container
                             ;
                             if ($.fn.disableSelection)
@@ -2636,7 +2636,7 @@
                                     .css(_c.togglers.cssReq) // add base/required styles
                                     .css(o.applyDemoStyles ? _c.togglers.cssDemo : {}) // add demo styles
                                     .addClass(tClass + " " + tClass + _pane)
-                                    .hover(addHover, removeHover) // ALWAYS add hover-classes, even if toggling is not enabled - handle with CSS instead
+                                    .on('hover',addHover, removeHover) // ALWAYS add hover-classes, even if toggling is not enabled - handle with CSS instead
                                     .on("mouseenter", onResizerEnter) // NEED toggler.mouseenter because mouseenter MAY NOT fire on resizer
                                     .appendTo($R) // append SPAN to resizer DIV
                                 ;
@@ -3101,7 +3101,7 @@
                         $(document).off("." + sID); // keyDown (hotkeys)
 
                         if (typeof evt_or_destroyChildren === "object")
-                        // stopPropagation if called by trigger("layoutdestroy") - use evtPane utility
+                            // stopPropagation if called by trigger("layoutdestroy") - use evtPane utility
                             evtPane(evt_or_destroyChildren);
                         else // no event, so transfer 1st param to destroyChildren param
                             destroyChildren = evt_or_destroyChildren;
@@ -3652,7 +3652,7 @@
                             if (s.autoResize && s.size != o.size) // resize pane to original size set in options
                                 sizePane(pane, o.size, true, true, true); // true=skipCallback/noAnimation/forceResize
                             else
-                            // make sure there is enough space available to open the pane
+                                // make sure there is enough space available to open the pane
                                 setSizeLimits(pane, slide);
 
                             // onopen_start callback - will CANCEL open if returns false
@@ -3825,7 +3825,7 @@
                             evt.stopImmediatePropagation();
 
                         if (s.isClosed && evt && evt.type === "mouseenter" && delay > 0)
-                        // trigger = mouseenter - use a delay
+                            // trigger = mouseenter - use a delay
                             timer.set(pane + "_openSlider", open_NOW, delay);
                         else
                             open_NOW(); // will unbind events if is already open
@@ -3864,7 +3864,7 @@
                             // handle incorrect mouseleave trigger, like when over a SELECT-list in IE
                         }
                         else if (evt) // trigger = mouseleave - use a delay
-                        // 1 sec delay if 'opening', else .3 sec
+                            // 1 sec delay if 'opening', else .3 sec
                             timer.set(pane + "_closeSlider", close_NOW, max(o.slideDelay_close, delay));
                         else // called programically
                             close_NOW();
@@ -3953,7 +3953,7 @@
                         $R
                             // add or remove event
                             [enable ? "bind" : "unbind"](evtName + '.' + sID, slideOpen)
-                        // set the appropriate cursor & title/tip
+                            // set the appropriate cursor & title/tip
                             .css("cursor", enable ? o.sliderCursor : "default")
                             .attr("title", enable ? o.tips.Slide : "")
                         ;
@@ -4533,7 +4533,7 @@
                                     }
 
                                 if (windowWidth >= o.responsive.sizes.sm && windowWidth < o.responsive.sizes.md)
-                                //if(s.size >= o.responsive.sizes.sm)
+                                    //if(s.size >= o.responsive.sizes.sm)
                                     if (o.responsive.when === 'sm' || o.responsive.when === 'xs') {
                                         paneResponsive = false;
                                     } else {
@@ -4710,7 +4710,7 @@
                                 m.spaceAbove = m.top; // just for state - not used in calc
                                 m.bottom = m.top + m.height;
                                 if ($F.length)
-                                //spaceBelow = (LastFooter.top + LastFooter.height) [footerBottom] - Content.bottom + max(LastFooter.marginBottom, pane.paddingBotom)
+                                    //spaceBelow = (LastFooter.top + LastFooter.height) [footerBottom] - Content.bottom + max(LastFooter.marginBottom, pane.paddingBotom)
                                     m.spaceBelow = ($F[0].offsetTop + $F.outerHeight()) - m.bottom + _below($F);
                                 else // no footer - check marginBottom on Content element itself
                                     m.spaceBelow = _below($C);
@@ -5462,7 +5462,7 @@
             if (document.cookie && document.cookie != '') {
                 var cookies = document.cookie.split(';');
                 for (var i = 0; i < cookies.length; i++) {
-                    var cookie = jQuery.trim(cookies[i]);
+                    var cookie = String.prototype.trim(cookies[i]);
                     // Does this cookie string begin with the name we want?
                     if (cookie.substring(0, name.length + 1) == (name + '=')) {
                         cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
@@ -5795,7 +5795,7 @@
                     , pair, pane, key, val
                     , ps, pC, child, array, count, branch
                 ;
-                if ($.isArray(keys))
+                if (Array.isArray(keys))
                     keys = keys.join(",");
                 // convert keys to an array and change delimiters from '__' to '.'
                 keys = keys.replace(/__/g, ".").split(',');
@@ -5849,7 +5849,7 @@
 
                 function stringify(h) {
                     var D = [], i = 0, k, v, t // k = key, v = value
-                        , a = $.isArray(h)
+                        , a = Array.isArray(h)
                     ;
                     for (k in h) {
                         v = h[k];
@@ -5929,7 +5929,7 @@
                 } else if (sm.enabled) {
                     // update the options from cookie or callback
                     // if options is a function, call it to get stateData
-                    if ($.isFunction(sm.autoLoad)) {
+                    if (typeof sm.autoLoad === "function") {
                         var d = {};
                         try {
                             d = sm.autoLoad(inst, inst.state, inst.options, inst.options.name || ''); // try to get data from fn
@@ -5946,7 +5946,7 @@
                 var sm = inst.options.stateManagement;
                 if (sm.enabled && sm.autoSave) {
                     // if options is a function, call it to save the stateData
-                    if ($.isFunction(sm.autoSave)) {
+                    if (typeof sm.autoSave === "function") {
                         try {
                             sm.autoSave(inst, inst.state, inst.options, inst.options.name || ''); // try to get data from fn
                         } catch (e) {
@@ -6506,7 +6506,7 @@
     })
     (jQuery);
 
-  return jQuery;
+    return jQuery;
 }));
 
 

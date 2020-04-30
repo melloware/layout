@@ -11,3 +11,5 @@
 *.rar
 hs_err_pid*
 .idea/
+/node_modules/
+/layout.iml
