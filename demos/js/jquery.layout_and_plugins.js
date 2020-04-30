@@ -2615,7 +2615,7 @@
                                 .addClass(rClass + " " + rClass + _pane)
                                 .on('hover',addHover, removeHover) // ALWAYS add hover-classes, even if resizing is not enabled - handle with CSS instead
                                 .on('hover',onResizerEnter, onResizerLeave) // ALWAYS NEED resizer.mouseleave to balance toggler.mouseenter
-                                .on('mouseup',$.layout.disableTextSelection) // prevent text-selection OUTSIDE resizer
+                                .on('mousedown',$.layout.disableTextSelection) // prevent text-selection OUTSIDE resizer
                                 .on('mouseup',$.layout.enableTextSelection)  // not really necessary, but just in case
                                 .appendTo($N) // append DIV to container
                             ;
