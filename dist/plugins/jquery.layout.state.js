@@ -2,7 +2,7 @@
  * @preserve jquery.layout.state 1.0
  * $Date: 2011-07-16 08:00:00 (Sat, 16 July 2011) $
  *
- * Copyright (c) 2010 
+ * Copyright (c) 2010
  *   Kevin Dalman (http://allpro.net)
  *
  * Dual licensed under the GPL (http://www.gnu.org/licenses/gpl.html)
@@ -67,7 +67,7 @@ $.ui.cookie = {
 		,	pair	// loop var
 		;
 		for (var i=0, n=cs.length; i < n; i++) {
-			pair = $.trim(cs[i]).split('='); // name=value pair
+			pair = String.prototype.trim.call(cs[i]).split('='); // name=value pair
 			if (pair[0] == name) // found the layout cookie
 				return decodeURIComponent(pair[1]);
 		}
@@ -193,7 +193,7 @@ $.layout.state = {
 		}
 		return c;
 	}
-	
+
 	/**
 	 * Update layout options from the cookie, if one exists
 	 *

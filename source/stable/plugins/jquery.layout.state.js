@@ -2,7 +2,7 @@
  * jquery.layout.state 1.2
  * $Date: 2014-08-30 08:00:00 (Sat, 30 Aug 2014) $
  *
- * Copyright (c) 2014 
+ * Copyright (c) 2014
  *   Kevin Dalman (http://allpro.net)
  *
  * Dual licensed under the GPL (http://www.gnu.org/licenses/gpl.html)
@@ -27,7 +27,7 @@ if (!$.layout) return;
  *	This creates $.ui.cookie so Layout does not need the cookie.jquery.js plugin
  *	NOTE: This utility is REQUIRED by the layout.state plugin
  *
- *	Cookie methods in Layout are created as part of State Management 
+ *	Cookie methods in Layout are created as part of State Management
  */
 if (!$.ui) $.ui = {};
 $.ui.cookie = {
@@ -42,7 +42,7 @@ $.ui.cookie = {
 		,	pair, data, i
 		;
 		for (i=0; pair=cs[i]; i++) {
-			data = $.trim(pair).split('='); // name=value => [ name, value ]
+			data = String.prototype.trim.call(pair).split('='); // name=value => [ name, value ]
 			if (data[0] == name) // found the layout cookie
 				return decodeURIComponent(data[1]);
 		}
@@ -244,7 +244,7 @@ $.layout.state = {
 			var o = $.extend(true, {}, data);
 			//delete o.center; // center has no state-data - only children
 			$.each($.layout.config.allPanes, function (idx, pane) {
-				if (o[pane]) delete o[pane].children;		   
+				if (o[pane]) delete o[pane].children;
 			 });
 			// update CURRENT layout-options with saved state data
 			$.extend(true, inst.options, o);
