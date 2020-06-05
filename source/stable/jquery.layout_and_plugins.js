@@ -1,7 +1,7 @@
 /**
  * @preserve
- * jquery.layout 1.7.4
- * $Date: 2019-05-01 $
+ * jquery.layout 1.7.5
+ * $Date: 2020-05-28 $
  * $Rev: 1.0.7.4 $
  *
  * Copyright (c) 2014 Kevin Dalman (http://jquery-dev.com)
@@ -27,6 +27,7 @@
  *              @alexsielicki   Fixing issue with running under webpack with jQuery 3.3.1 and jQuery Migrate plugin
  *
  * 2019/03/25 - @rsprinkle      AMD Support - Return JQuery
+ * 2020/05/28 - @meloware       Updates for Jquery 4.0
  */
 
 /* JavaDoc Info: http://code.google.com/closure/compiler/docs/js-for-compiler.html
@@ -53,7 +54,7 @@
     (function ($) {
 // alias Math methods - used a lot!
             var min = Math.min, max = Math.max, round = Math.floor, isStr = function (v) {
-                    return $.type(v) === "string";
+                    return typeof v === "string";
                 }
 
                 /**
@@ -1187,7 +1188,7 @@
                         ;
                         if (hasPane && !$P) // a pane is specified, but does not exist!
                             return retVal;
-                        if (!hasPane && $.type(pane) === "boolean") {
+                        if (!hasPane && typeof pane === "boolean") {
                             skipBoundEvents = pane; // allow pane param to be skipped for Layout callback
                             pane = "";
                         }
@@ -1217,7 +1218,7 @@
                                 }
                             } catch (ex) {
                                 _log(options.errors.callbackError.replace(/EVENT/, String.prototype.trim((pane || "") + " " + lng)), false);
-                                if ($.type(ex) === "string" && string.length)
+                                if (typeof ex === "string" && string.length)
                                     _log("Exception:  " + ex, false);
                             }
                         }
@@ -5516,7 +5517,7 @@
                     , clear = false
                     , o = cookieOpts || {}
                     , x = o.expires || null
-                    , t = $.type(x)
+                    , t = typeof x
                 ;
                 if (t === "date")
                     date = x;
@@ -5780,7 +5781,7 @@
              */
             , readState: function (inst, opts) {
                 // backward compatility
-                if ($.type(opts) === 'string')
+                if (typeof opts === 'string')
                     opts = {keys: opts};
                 if (!opts)
                     opts = {};
@@ -6078,7 +6079,7 @@
              */
             , addToggle: function (inst, selector, pane, slide) {
                 $.layout.buttons.get(inst, selector, pane, "toggle")
-                    .click(function (evt) {
+                    .on("click", function (evt) {
                         inst.toggle(pane, !!slide);
                         evt.stopPropagation();
                     });
@@ -6093,7 +6094,7 @@
              */
             , addSlideToggle: function (inst, selector, pane, slide) {
                 $.layout.buttons.get(inst, selector, pane, "slideToggle")
-                    .click(function (evt) {
+                    .on("click", function (evt) {
                         inst.slideToggle(pane, !!slide);
                         evt.stopPropagation();
                     });
@@ -6110,7 +6111,7 @@
             , addOpen: function (inst, selector, pane, slide) {
                 $.layout.buttons.get(inst, selector, pane, "open")
                     .attr("title", inst.options[pane].tips.Open)
-                    .click(function (evt) {
+                    .on("click", function (evt) {
                         inst.open(pane, !!slide);
                         evt.stopPropagation();
                     });
@@ -6126,7 +6127,7 @@
             , addClose: function (inst, selector, pane) {
                 $.layout.buttons.get(inst, selector, pane, "close")
                     .attr("title", inst.options[pane].tips.Close)
-                    .click(function (evt) {
+                    .on("click", function (evt) {
                         inst.close(pane);
                         evt.stopPropagation();
                     });
@@ -6150,7 +6151,7 @@
                 var $E = $.layout.buttons.get(inst, selector, pane, "pin");
                 if ($E.length) {
                     var s = inst.state[pane];
-                    $E.click(function (evt) {
+                    $E.on("click", function (evt) {
                         $.layout.buttons.setPinState(inst, $(this), pane, (s.isSliding || s.isClosed));
                         if (s.isSliding || s.isClosed)
                             inst.open(pane); // change from sliding to open

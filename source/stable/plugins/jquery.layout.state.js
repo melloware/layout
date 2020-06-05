@@ -55,7 +55,7 @@ $.ui.cookie = {
 		,	clear	= false
 		,	o		= cookieOpts || {}
 		,	x		= o.expires  || null
-		,	t		= $.type(x)
+		,	t		= typeof x
 		;
 		if (t === "date")
 			date = x;
@@ -310,7 +310,7 @@ $.layout.state = {
 	 */
 ,	readState: function (inst, opts) {
 		// backward compatility
-		if ($.type(opts) === 'string') opts = { keys: opts };
+		if (typeof opts === 'string') opts = { keys: opts };
 		if (!opts) opts = {};
 		var	sm		= inst.options.stateManagement
 		,	ic		= opts.includeChildren
