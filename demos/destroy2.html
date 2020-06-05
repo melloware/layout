@@ -14,7 +14,7 @@
 
 	</style>
 
-	<script type="text/javascript" src="js/jquery-3.5.0.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
+	<script type="text/javascript" src="js/jquery-3.5.1.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../source/stable/jquery.layout_and_plugins.js"></script>
 	<script type="text/javascript" src="js/debug.js"></script>
@@ -36,7 +36,7 @@
 			$.each( branch, function (k,v) {
 				if ($.isPlainObject( v )) {
 					// we can skip sub-keys in options, state, etc.
-					if ( k.match(/(options|state)/) ) // 
+					if ( k.match(/(options|state)/) ) //
 						keys[ k ] = {};
 					else
 						keys[ k ] = getKeys( v );
@@ -91,14 +91,14 @@
 
 	<button onClick="pageLayout.destroy()"
 	>Destroy Outer</button>
-	
+
 	<button onClick="pageLayout = pageLayout.container.layout( pageLayout.options )"
 	>Create Outer</button> &nbsp; &nbsp;
 
 
 	<button onClick="pageLayout.west.children.middleLayout.destroy()"
 	>Destroy Middle</button>
-	
+
 	<button onClick="pageLayout.createChildren('west')"
 	>Create Middle</button> &nbsp; &nbsp;
 
@@ -112,7 +112,7 @@
 
 	<button onClick="pageLayout.removePane('west')"
 	>Remove Outer-West Pane</button>
-	
+
 	<button onClick="pageLayout.addPane('west')"
 	>Re-Add Outer-West Pane</button> &nbsp; &nbsp;
 
@@ -136,13 +136,13 @@
 			Center Center
 			<p>
 				<input id="autoLoadState" type="checkbox" value="1" checked="checked" disabled="disabled"
-				onchange="var o = pageLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" 
+				onchange="var o = pageLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;"
 				onclick="this.blur(); this.focus();">
 				<label for="autoLoadState" style="color: #888;"><B>options.stateManagement.autoLoad</B></label>
 				<br> &nbsp; &nbsp; &nbsp; load-state when layout created - see options
 				<br><br>
 				<input id="autoSaveState" type="checkbox" value="1" checked="checked"
-				onchange="var o = pageLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" 
+				onchange="var o = pageLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;"
 				onclick="this.blur(); this.focus();">
 				<label for="autoSaveState"><B>options.stateManagement.autoSave</B></label>
 				<br> &nbsp; &nbsp; &nbsp; save-state on window.unload &amp; layout.destroy()

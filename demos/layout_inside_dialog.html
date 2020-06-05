@@ -1,11 +1,11 @@
 <!DOCTYPE HTML>
 <html>
-<head> 
-	<title>Layout in Dialog Demo</title> 
+<head>
+	<title>Layout in Dialog Demo</title>
 
 	<link rel="stylesheet" type="text/css" href="css/themes/smoothness/jquery-ui.css">
 
-	<style type="text/css"> 
+	<style type="text/css">
 
 	body {
 		font-family:	Arial, Helvetica, sans-serif;
@@ -31,7 +31,7 @@
 		 *	THIS HACK FIXES A DIALOG BOX POSITIONING BUG
 		 *	prevents incorrect top/left values that are applied from taking effect
 		 *	This page now uses a patched version of UI 1.8.1, so this hack no longer required
-		 *	SEE UI Ticket #5662 - http://dev.jqueryui.com/ticket/5662#comment:3 
+		 *	SEE UI Ticket #5662 - http://dev.jqueryui.com/ticket/5662#comment:3
 		top:		0 !important;
 		left:		0 !important;
 		 */
@@ -95,19 +95,19 @@
 				/*background:	#CCC;*/
 			}
 
-	</style> 
+	</style>
 
-	<script type="text/javascript" src="js/jquery-3.5.0.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.js"></script> 
+	<script type="text/javascript" src="js/jquery-3.5.1.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../source/stable/jquery.layout_and_plugins.js"></script>
 
-    <script type="text/javascript" src="js/themeswitchertool.js"></script> 
+    <script type="text/javascript" src="js/themeswitchertool.js"></script>
 	<script type="text/javascript" src="js/debug.js"></script>
 
 	<script type="text/javascript">
 
 	var
-	//	page has a simple layout 
+	//	page has a simple layout
 		pageLayout_settings = {
 			applyDefaultStyles:	true
 		,	initClosed:			true
@@ -120,24 +120,24 @@
 		,	resizeWithWindow:	false	// resizes with the dialog, not the window
 		,	spacing_open:		6
 		,	spacing_closed:		6
-		,	west__size:			'30%' 
-		,	west__minSize:		100 
-		,	west__maxSize:		300 
-		,	south__size:		'auto' 
-		,	south__closable:	false 
-		,	south__resizable:	false 
-		,	south__slidable:	false 
+		,	west__size:			'30%'
+		,	west__minSize:		100
+		,	west__maxSize:		300
+		,	south__size:		'auto'
+		,	south__closable:	false
+		,	south__resizable:	false
+		,	south__slidable:	false
 		//,	applyDefaultStyles:		true // DEBUGGING
 		}
-	; 
+	;
 
-	$(document).ready(function(){ 
+	$(document).ready(function(){
 
 		// simple page layout
 		$('body').layout( pageLayout_settings );
 
-		// dialogBox dialog 
-		$("#dialogBox").dialog({ 
+		// dialogBox dialog
+		$("#dialogBox").dialog({
 			title:		'Dialog Title'
 		,	width:		Math.floor($('body').width()  * .70)
 		,	height:		Math.floor($('body').height() * .65)
@@ -155,11 +155,11 @@
 		,	resize:		function(){ if (dialogLayout) dialogLayout.resizeAll(); }
 		});
 
-		// Dialog Link 
-		$('#dialogOpener').click(function(){ 
-			$('#dialogBox').dialog('open'); 
-			return false; 
-		}); 
+		// Dialog Link
+		$('#dialogOpener').on('click',function(){
+			$('#dialogBox').dialog('open');
+			return false;
+		});
 
 		addThemeSwitcher('body > .ui-layout-north',{ top: '13px', right: '20px' });
 
@@ -167,8 +167,8 @@
 
 	</script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 <!-- SIMPLE PAGE-LAYOUT -->
 <div class="ui-layout-north" style="text-align: center;">
@@ -197,27 +197,27 @@
 
 
 <!-- DIALOG BOX w/ INNER-LAYOUT -->
-<div id="dialogBox"> 
+<div id="dialogBox">
 
-	<div class="ui-layout-west ui-widget-content ui-corner-all"> 
+	<div class="ui-layout-west ui-widget-content ui-corner-all">
 		<div class="pane-header ui-state-active">West Header</div>
 		<div class="ui-layout-content ui-widget-content">
 			Scrolling content...
 			<p>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...</p>
 		</div>
 		<div class="pane-footer ui-state-default">Center Footer</div>
-	 </div> 
+	 </div>
 
-	<div class="ui-layout-center ui-widget-content ui-corner-all"> 
+	<div class="ui-layout-center ui-widget-content ui-corner-all">
 		<div class="pane-header ui-state-active">Center Header</div>
 		<div class="ui-layout-content ui-widget-content" style="border: 0;">
 			Scrolling content...
 			<p><a href="http://layout.jquery-dev.com/demos.cfm">Go to the Demos page</a></p>
 			<!-- THIS PROBLEM IS NOW FIXED IN UI 1.8.4
-			<P>NOTE: This demo is using a patched copy of jquery-ui-1.8.1 to 
-				fix <u>2 bugs</u> in the UI Resizable._alsoResize method used by the dialog. 
-				One of the bugs is Opera-specific.</P> 
-			<P>I committed a patch the fixes both bugs, so the issues should be fixed in the next 
+			<P>NOTE: This demo is using a patched copy of jquery-ui-1.8.1 to
+				fix <u>2 bugs</u> in the UI Resizable._alsoResize method used by the dialog.
+				One of the bugs is Opera-specific.</P>
+			<P>I committed a patch the fixes both bugs, so the issues should be fixed in the next
 				maintentance release of UI (1.8.3?)</P>
 			<P><B>In the meantime</B>, both bugs can be avoided by adding an extra DIV inside the dialog
 				to contain the layout - set it's height &amp; width to 100%.
@@ -279,13 +279,13 @@
 				...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...<br>...</p>
 		</div>
 		<div class="pane-footer ui-state-default">Center Footer</div>
-	</div> 
+	</div>
 
-	<div class="ui-layout-south ui-widget-header ui-corner-all"> 
+	<div class="ui-layout-south ui-widget-header ui-corner-all">
 		South Pane ( messages or statusbar )
 	</div>
 
-</div> 
+</div>
 
-</body> 
+</body>
 </html>

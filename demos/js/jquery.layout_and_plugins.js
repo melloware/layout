@@ -6078,7 +6078,7 @@
              */
             , addToggle: function (inst, selector, pane, slide) {
                 $.layout.buttons.get(inst, selector, pane, "toggle")
-                    .click(function (evt) {
+                    .on('click',function (evt) {
                         inst.toggle(pane, !!slide);
                         evt.stopPropagation();
                     });
@@ -6093,7 +6093,7 @@
              */
             , addSlideToggle: function (inst, selector, pane, slide) {
                 $.layout.buttons.get(inst, selector, pane, "slideToggle")
-                    .click(function (evt) {
+                    .on('click',function (evt) {
                         inst.slideToggle(pane, !!slide);
                         evt.stopPropagation();
                     });
@@ -6110,7 +6110,7 @@
             , addOpen: function (inst, selector, pane, slide) {
                 $.layout.buttons.get(inst, selector, pane, "open")
                     .attr("title", inst.options[pane].tips.Open)
-                    .click(function (evt) {
+                    .on('click',function (evt) {
                         inst.open(pane, !!slide);
                         evt.stopPropagation();
                     });
@@ -6126,7 +6126,7 @@
             , addClose: function (inst, selector, pane) {
                 $.layout.buttons.get(inst, selector, pane, "close")
                     .attr("title", inst.options[pane].tips.Close)
-                    .click(function (evt) {
+                    .on('click',function (evt) {
                         inst.close(pane);
                         evt.stopPropagation();
                     });
@@ -6150,7 +6150,7 @@
                 var $E = $.layout.buttons.get(inst, selector, pane, "pin");
                 if ($E.length) {
                     var s = inst.state[pane];
-                    $E.click(function (evt) {
+                    $E.on('click',function (evt) {
                         $.layout.buttons.setPinState(inst, $(this), pane, (s.isSliding || s.isClosed));
                         if (s.isSliding || s.isClosed)
                             inst.open(pane); // change from sliding to open

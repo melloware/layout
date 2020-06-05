@@ -16,7 +16,7 @@ $.fn.themeswitcher = function( settings ) {
 		onSelect: function(){}
 	}, settings );
 
-	// markup 
+	// markup
 	var button = $([
 		'<a href="#" class="jquery-ui-themeswitcher-trigger">'
 	,		'<span class="jquery-ui-themeswitcher-icon"></span>'
@@ -25,7 +25,7 @@ $.fn.themeswitcher = function( settings ) {
 	,		'</span>'
 	,	'</a>'
 	].join('') );
-	
+
 	// TODO: download all the preview images and host locally
 	var switcherpane = $([
 		'<div class="jquery-ui-themeswitcher"><div id="themeGallery"><ul>'
@@ -129,14 +129,14 @@ $.fn.themeswitcher = function( settings ) {
 	].join('') ).find('div').removeAttr('id');
 
 	//button events
-	button.click(function(){
+	button.on('click',function(){
 		if ( switcherpane.is(':visible') )
 			switcherpane.spHide();
 		else
 			switcherpane.spShow();
 		return false;
 	});
-	
+
 	//menu events (mouseout didn't work...)
 	switcherpane.hover(
 		$.noop,
@@ -159,11 +159,11 @@ $.fn.themeswitcher = function( settings ) {
 		$(this).slideUp( 50, function(){ options.onClose(); });
 		button.css( button_default );
 	}
-	
-		
+
+
 	/* Theme Loading
 	---------------------------------------------------------------------*/
-	switcherpane.find('a').click(function(){
+	switcherpane.find('a').on('click',function(){
 		updateCSS( $(this).attr('href') );
 		var themeName = $(this).find('span').text();
 		button.find('.jquery-ui-themeswitcher-title').text( options.buttonPreText + themeName );
@@ -172,7 +172,7 @@ $.fn.themeswitcher = function( settings ) {
 		if (options.closeOnSelect && switcherpane.is(':visible')){ switcherpane.spHide(); }
 		return false;
 	});
-	
+
 	//function to append a new theme stylesheet with the new style changes
 	function updateCSS(locStr){
 		var cssLink = $('<link href="'+locStr+'" type="text/css" rel="Stylesheet" class="ui-theme" />');
@@ -180,9 +180,9 @@ $.fn.themeswitcher = function( settings ) {
 
 		if ( $("link.ui-theme").length > 3 )
 			$("link.ui-theme:first").remove();
-	}	
-	
-	/* Inline CSS 
+	}
+
+	/* Inline CSS
 	---------------------------------------------------------------------*/
 	var button_default = {
 		fontFamily: 'Trebuchet MS, Verdana, sans-serif',
@@ -194,7 +194,7 @@ $.fn.themeswitcher = function( settings ) {
 		'-webkit-border-radius': '6px',
 		textDecoration: 'none',
 		padding: '3px 3px 3px 8px',
-		width: options.width - 11,//minus must match left and right padding 
+		width: options.width - 11,//minus must match left and right padding
 		display: 'block',
 		height: options.buttonHeight,
 		outline: '0'
@@ -221,19 +221,19 @@ $.fn.themeswitcher = function( settings ) {
 	//button css
 	button.css(button_default)
 		.hover(
-			function(){ 
-				$(this).css(button_hover); 
+			function(){
+				$(this).css(button_hover);
 			},
-			function(){ 
+			function(){
 			 if( !switcherpane.is(':animated') && switcherpane.is(':hidden') ){	$(this).css(button_default);  }
-			}	
+			}
 		)
 		.find('.jquery-ui-themeswitcher-icon').css({
 			float: 'right',
 			width: '16px',
 			height: '16px',
 			background: 'url(css/themeswitcher/icon_color_arrow.gif) 50% 50% no-repeat'
-		});	
+		});
 
 	//pane css
 	switcherpane
@@ -267,19 +267,19 @@ $.fn.themeswitcher = function( settings ) {
 
 		.find('li')
 		.hover(
-			function(){ 
+			function(){
 				$(this).css({
 					'borderColor':'#555',
 					'background': 'url(css/themeswitcher/menuhoverbg.png) 50% 50% repeat-x',
 					cursor: 'pointer'
-				}); 
+				});
 			},
-			function(){ 
+			function(){
 				$(this).css({
 					'borderColor':'#111',
 					'background': '#000',
 					cursor: 'auto'
-				}); 
+				});
 			}
 		)
 		.css({
@@ -316,7 +316,7 @@ $.fn.themeswitcher = function( settings ) {
 		})
 		.end()
 	;
-	
+
 
 	$(this).append( button );
 	$('body').append( switcherpane );
