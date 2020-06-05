@@ -184,7 +184,7 @@ $.layout.buttons = {
 		var $E = $.layout.buttons.get(inst, selector, pane, "pin");
 		if ($E.length) {
 			var s = inst.state[pane];
-			$E.on('click',function (evt) {
+			$E.on("click", function (evt) {
 				$.layout.buttons.setPinState(inst, $(this), pane, (s.isSliding || s.isClosed));
 				if (s.isSliding || s.isClosed) inst.open( pane ); // change from sliding to open
 				else inst.close( pane ); // slide-closed
