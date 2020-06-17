@@ -3,10 +3,14 @@ jQuery UI Layout
 
 <a href="https://snyk.io/test/github/GedMarc/layout?targetFile=package.json"><img src="https://snyk.io/test/github/GedMarc/layout/badge.svg?targetFile=package.json" alt="Known Vulnerabilities" data-canonical-src="https://snyk.io/test/github/GedMarc/layout?targetFile=package.json" style="max-width:100%;"></a>
 
+
 1.7.5
 ------------------
+- Update to JQuery 3.5.1
 - Add JQuery Migrate 3.3
-- Change .click to on("click")
+- A few more smaller fixes
+- Prep for the .css() update as brought up by @Melloware
+
 
 1.7.1
 ------------------

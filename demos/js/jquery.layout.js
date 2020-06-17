@@ -1197,7 +1197,7 @@
                                     retVal = g(fn)(Instance, s, o, lName);
                             }
                         } catch (ex) {
-                            _log(options.errors.callbackError.replace(/EVENT/, $.trim((pane || "") + " " + lng)), false);
+                            _log(options.errors.callbackError.replace(/EVENT/, String.prototype.trim.call((pane || "") + " " + lng)), false);
                             if ($.type(ex) === "string" && string.length)
                                 _log("Exception:  " + ex, false);
                         }
@@ -1521,7 +1521,7 @@
                     if (type == "resizer" && $El.hasClass(root + _slide))
                         classes += (root + _slide + _hover) + (root + _pane + _slide + _hover);
 
-                    return $.trim(classes);
+                    return String.prototype.trim.call(classes);
                 }
                 , addHover = function (evt, el) {
                     var $E = $(el || this);
@@ -5482,7 +5482,7 @@ jQuery.cookie = function (name, value, options) {
                 , pair, data, i
             ;
             for (i = 0; pair = cs[i]; i++) {
-                data = $.trim(pair).split('='); // name=value => [ name, value ]
+                data = String.prototype.trim.call(pair).split('='); // name=value => [ name, value ]
                 if (data[0] == name) // found the layout cookie
                     return decodeURIComponent(data[1]);
             }
@@ -6057,7 +6057,7 @@ jQuery.cookie = function (name, value, options) {
          */
         , addToggle: function (inst, selector, pane, slide) {
             $.layout.buttons.get(inst, selector, pane, "toggle")
-                .click(function (evt) {
+                .on('click',function (evt) {
                     inst.toggle(pane, !!slide);
                     evt.stopPropagation();
                 });
@@ -6074,7 +6074,7 @@ jQuery.cookie = function (name, value, options) {
         , addOpen: function (inst, selector, pane, slide) {
             $.layout.buttons.get(inst, selector, pane, "open")
                 .attr("title", inst.options[pane].tips.Open)
-                .click(function (evt) {
+                .on('click',function (evt) {
                     inst.open(pane, !!slide);
                     evt.stopPropagation();
                 });
@@ -6090,7 +6090,7 @@ jQuery.cookie = function (name, value, options) {
         , addClose: function (inst, selector, pane) {
             $.layout.buttons.get(inst, selector, pane, "close")
                 .attr("title", inst.options[pane].tips.Close)
-                .click(function (evt) {
+                .on('click',function (evt) {
                     inst.close(pane);
                     evt.stopPropagation();
                 });
@@ -6114,7 +6114,7 @@ jQuery.cookie = function (name, value, options) {
             var $E = $.layout.buttons.get(inst, selector, pane, "pin");
             if ($E.length) {
                 var s = inst.state[pane];
-                $E.click(function (evt) {
+                $E.on('click',function (evt) {
                     $.layout.buttons.setPinState(inst, $(this), pane, (s.isSliding || s.isClosed));
                     if (s.isSliding || s.isClosed)
                         inst.open(pane); // change from sliding to open
@@ -6430,7 +6430,7 @@ jQuery.cookie = function (name, value, options) {
 (function ($) {
     $.layout.callbacks.resizeDataTables = function (x, ui) {
         // may be called EITHER from layout-pane.onresize OR tabs.show
-        var oPane = ui.jquery ? ui[0] : ui.panel; 
+        var oPane = ui.jquery ? ui[0] : ui.panel;
         // cannot resize if the pane is currently closed or hidden
         if (!$(oPane).is(":visible"))
             return;

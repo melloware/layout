@@ -9,13 +9,13 @@
 
 	<style type="text/css">
 
-	/* 
+	/*
 	 *	PAGE SIZE - FOR DEMONSTRATION ONLY
 	 */
 	html {
 		/* allow scrolling if layout hits min-width/height */
 		overflow:		auto !important; /* override Layout default of 'hidden' to allow scrollbars */
-		
+
 	}
 	body {
 		background:		#99b;
@@ -29,7 +29,7 @@
 		margin:			0 auto !important; /* override Layout default of '0' */
 	}
 
-	/* 
+	/*
 	 *	HELPER CLASSES
 	 */
 	.container {
@@ -91,11 +91,11 @@
 		}
 		p.button button	{
 			font-size:		1em;
-			text-align: 	left; 
+			text-align: 	left;
 			vertical-align: middle;
 			padding: 		2px 2.5ex;
 			min-width:		31ex;
-			margin-right: 	1.5ex; 
+			margin-right: 	1.5ex;
 			margin-left:	-33ex;
 			margin-bottom:	5px;
 			position:		relative;
@@ -104,7 +104,7 @@
 	</style>
 
 
-	<script type="text/javascript" src="js/jquery-3.5.0.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
+	<script type="text/javascript" src="js/jquery-3.5.1.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/debug.js"></script>
 	<script type="text/javascript" src="../source/stable/jquery.layout.js"></script>
@@ -203,7 +203,7 @@
 					,	stateManagement__enabled:	true	// enable stateManagement - automatic cookie load & save enabled by default
 					}
 					// Only ONE of the two tabs has an inner-child layout.
-					// So add children as separate keys to prevent Layout from 
+					// So add children as separate keys to prevent Layout from
 					// _trying_ to init layouts inside BOTH tab-layouts.
 				,	{	name:				'west-tab-3'
 					,	containerSelector:	"> .childLayout:last" // TWO child layouts - inside Tabs 2 & 3
@@ -264,13 +264,13 @@
 
 		<hr />
 		<p><input id="autoLoadState" type="checkbox" value="1" checked="checked" disabled="disabled"
-			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" 
+			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;"
 			onclick="this.blur(); this.focus();" />
 			<label for="autoLoadState" style="color: #888;"><b>options.stateManagement.autoLoad</b></label>
 			<br /> &nbsp; &nbsp; &nbsp; load-state when layout created - see options
 			<br /><br />
 			<input id="autoSaveState" type="checkbox" value="1" checked="checked"
-			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" 
+			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;"
 			onclick="this.blur(); this.focus();" />
 			<label for="autoSaveState"><b>options.stateManagement.autoSave</b></label>
 			<br /> &nbsp; &nbsp; &nbsp; save-state on window.unload &amp; layout.destroy()
@@ -280,13 +280,13 @@
 
 		<hr />
 		<p><input id="autoLoadState" type="checkbox" value="1" checked="checked" disabled="disabled"
-			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" 
+			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;"
 			onclick="this.blur(); this.focus();" />
 			<label for="autoLoadState" style="color: #888;"><b>options.stateManagement.autoLoad</b></label>
 			&ndash; <b>loadState</b> when layout created? (can't change here)
 			<br />
 			<input id="autoSaveState" type="checkbox" value="1" checked="checked"
-			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;" 
+			onchange="var o = myLayout.options.stateManagement; o.autoSave=this.checked; if (this.checked) o.enabled=true;"
 			onclick="this.blur(); this.focus();" />
 			<label for="autoSaveState"><b>options.stateManagement.autoSave</b></label>
 			&ndash; <b>saveState</b> on window.unload ?
@@ -341,7 +341,7 @@
 		<p class="button">
 			<button onclick="myLayout.loadState( window.fullState, { animateLoad: false })"
 							>myLayout.loadState( fullState, { animateLoad: false })</button>
-			&gt RESET layout to 
+			&gt RESET layout to
 			<a href="#" onclick="console.data(window.fullState,'fullState'); return false;">as it was when loaded</a> (instant, no reload)
 			<br />
 			<button onclick="myLayout.loadState( window.fullState, { animateLoad: true })"

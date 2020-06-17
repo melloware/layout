@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-<head> 
-	<title>Accordions and Tabs</title> 
+<head>
+	<title>Accordions and Tabs</title>
 
 	<link rel="stylesheet" type="text/css" href="../source/stable/layout-default.css">
 
@@ -35,14 +35,14 @@
 	<link rel="stylesheet" type="text/css" href="css/themes/smoothness/jquery-ui.css">
 
 
-	<script type="text/javascript" src="js/jquery-3.5.0.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
-	<script type="text/javascript" src="js/jquery-ui.js"></script> 
+	<script type="text/javascript" src="js/jquery-3.5.1.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="../source/stable/jquery.layout_and_plugins.js"></script>
 
-    <script type="text/javascript" src="js/themeswitchertool.js"></script> 
+    <script type="text/javascript" src="js/themeswitchertool.js"></script>
 	<script type="text/javascript" src="js/debug.js"></script>
 
-	<script type="text/javascript"> 
+	<script type="text/javascript">
 
 	$(document).ready(function(){
 		// alias callback for convenience
@@ -51,13 +51,13 @@
 
 		// OUTER/PAGE LAYOUT
 		pageLayout = $("body").layout({ // DO NOT use "var pageLayout" here
-			west__size:			.30 
-		,	east__size:			.30 
+			west__size:			.30
+		,	east__size:			.30
 		,	south__initClosed:	true
 		,	north__initClosed:	true
 		,	west__onresize:		resizePaneAccordions // west accordion a child of pane
 		,	east__onresize:		resizePaneAccordions // east accordion nested inside a tab-panel
-		}); 
+		});
 
 		// TABS IN CENTER-PANE
 		// create tabs before wrapper-layout so elems are correct size before creating layout
@@ -100,14 +100,14 @@
 		setTimeout( pageLayout.resizeAll, 2000 ); /* allow time for browser to re-render with new theme */
 	});
 
-	</script> 
-    
-</head> 
-<body> 
+	</script>
+
+</head>
+<body>
 
 
-<div class="ui-layout-north ui-widget-content add-padding">North</div> 
-<div class="ui-layout-south ui-widget-content add-padding">South</div> 
+<div class="ui-layout-north ui-widget-content add-padding">North</div>
+<div class="ui-layout-south ui-widget-content add-padding">South</div>
 
 
 <div class="ui-layout-west no-scrollbar add-padding grey">
@@ -116,8 +116,8 @@
 			<H3><a href="#">Section 1</a></H3>
 			<div>
 				<B>Accordion inside a layout-pane</B>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-					Vestibulum condimentum neque a velit laoreet dapibus. 
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+					Vestibulum condimentum neque a velit laoreet dapibus.
 					Etiam eleifend tempus pharetra.</p>
 				<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 				<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
@@ -141,7 +141,7 @@
 
 			<H3><a href="#">Section 4</a></H3>
 			<div>
-				<p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames 
+				<p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames
 					ac turpis egestas.</p>
 				<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
 					Aenean lacinia mauris vel est.</p>
@@ -163,7 +163,7 @@
 	<div class="ui-layout-center ui-widget-content add-scrollbar" style="border-top: 0;">
 		<div id="tab-panel-center-1" class="outline">
 			<B>Tabs inside a nested-layout</B>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 				Vestibulum condimentum neque a velit laoreet dapibus.</p>
 			<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 			<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
@@ -178,18 +178,18 @@
 				</div>
 				<div class="ui-layout-content no-scrollbar">
 					<div id="accordion-center">
-			
+
 						<H3><a href="#">Section 1</a></H3>
 						<div>
 							<B>Accordion inside a content-div (with a header) inside a Tab inside a nested-layout inside a layout-pane</B>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-								Vestibulum condimentum neque a velit laoreet dapibus. 
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Vestibulum condimentum neque a velit laoreet dapibus.
 								Etiam eleifend tempus pharetra.</p>
 							<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 							<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 							<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 						</div>
-			
+
 						<H3><a href="#">Section 2</a></H3>
 						<div>
 							<p style="font-weight: bold;">Sed Non Urna</p>
@@ -198,30 +198,30 @@
 								faucibus interdum tellus libero ac justo.</p>
 							<p>Vivamus non quam. In suscipit faucibus urna.</p>
 						</div>
-			
+
 						<H3><a href="#">Section 3</a></H3>
 						<div>
 							Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
 							Phasellus pellentesque purus in massa. Aenean in pede.
 						</div>
-			
+
 						<H3><a href="#">Section 4</a></H3>
 						<div>
-							<p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames 
+							<p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames
 								ac turpis egestas.</p>
 							<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
 								Aenean lacinia mauris vel est.</p>
 							<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
 								Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
 						</div>
-			
+
 					</div>
 				</div>
 			</div>
 			<!-- /center Accordion layout -->
 		</div>
 		<div id="tab-panel-center-3" class="outline">
-			Cras nec arcu sed nisi varius fermentum ut non nulla. Pellentesque ultricies condimentum nibh, 
+			Cras nec arcu sed nisi varius fermentum ut non nulla. Pellentesque ultricies condimentum nibh,
 			nec imperdiet felis laoreet sit amet.
 		</div>
 	</div>
@@ -250,7 +250,7 @@
 		<div id="tab-panel-east-1" class="full-height no-padding add-scrollbar">
 			<div class="ui-tabs-panel outline">
 				<B>Tabs using a header and layout-content div</B>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 					Vestibulum condimentum neque a velit laoreet dapibus.</p>
 				<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 				<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
@@ -259,56 +259,56 @@
 		</div>
 		<div id="tab-panel-east-3" class="full-height no-padding add-scrollbar">
 			<div class="ui-tabs-panel outline">
-				<p>Cras nec arcu sed nisi varius fermentum ut non nulla. Pellentesque ultricies condimentum nibh, 
+				<p>Cras nec arcu sed nisi varius fermentum ut non nulla. Pellentesque ultricies condimentum nibh,
 				nec imperdiet felis laoreet sit amet.</p>
 			</div>
 		</div>
 		<div id="tab-panel-east-2" class="full-height no-padding no-scrollbar">
 			<div id="accordion-east" class="full-height">
-		
+
 					<H3><a href="#">Section 1</a></H3>
 					<div>
 						<B>Accordion inside a Tab inside a content-div inside a layout-pane</B>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-							Vestibulum condimentum neque a velit laoreet dapibus. 
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+							Vestibulum condimentum neque a velit laoreet dapibus.
 							Etiam eleifend tempus pharetra.
 						</p>
 						<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 						<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 						<p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p><p>.</p>
 					</div>
-		
+
 					<H3><a href="#">Section 2</a></H3>
 					<div>
 						<p style="font-weight: bold;">Sed Non Urna</p>
-		
+
 						<p>Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus.
 							Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit,
 							faucibus interdum tellus libero ac justo.</p>
 						<p>Vivamus non quam. In suscipit faucibus urna.</p>
 					</div>
-		
+
 					<H3><a href="#">Section 3</a></H3>
 					<div>
 						<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
 							Phasellus pellentesque purus in massa. Aenean in pede.</p>
 					</div>
-		
+
 					<H3><a href="#">Section 4</a></H3>
 					<div>
-						<p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames 
+						<p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames
 							ac turpis egestas.</p>
 						<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
 							Aenean lacinia mauris vel est.</p>
 						<p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
 							Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
 					</div>
-		
+
 			</div>
 		</div>
 	</div>
 </div>
 
 
-</body> 
+</body>
 </html>

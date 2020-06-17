@@ -21,7 +21,7 @@
 	.hide	{ display:	none; }
 	</style>
 
-	<script type="text/javascript" src="js/jquery-3.5.0.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
+	<script type="text/javascript" src="js/jquery-3.5.1.js"></script><script type="text/javascript" src="js/jquery-migrate.js"></script>
 	<script type="text/javascript" src="js/jquery-ui.js"></script>
 	<script type="text/javascript" src="js/debug.js"></script>
 	<script type="text/javascript" src="../source/stable/jquery.layout.js"></script>
@@ -137,7 +137,7 @@
 <body>
 
 <div class="ui-layout-center hide"><b>Center pane</b>
-	
+
 	<p class="button"><button onclick="toggleAll()">Toggle All Panes</button></p>
 	<p>
 		Change the 'state' by opening some panes and adjusting their size,
@@ -189,7 +189,7 @@
 
 	<p class="button"><button onclick="myLayout.loadState( window.fullState )"
 									  >myLayout.loadState( fullState )</button>
-		&gt RESET layout to 
+		&gt RESET layout to
 		<a href="#" onclick="debugData(window.fullState,'fullState'); return false;">as it was when loaded</a> (instant, no reload)
 	<br /><button onclick="myLayout.loadState( window.fullState, {animateLoad: true})"
 						  >myLayout.loadState( fullState, { animateLoad: true })</button>
