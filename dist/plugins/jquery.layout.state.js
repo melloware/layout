@@ -8,8 +8,8 @@
  * Dual licensed under the GPL (http://www.gnu.org/licenses/gpl.html)
  * and MIT (http://www.opensource.org/licenses/mit-license.php) licenses.
  *
- * @dependancies: UI Layout 1.3.0.rc30.1 or higher
- * @dependancies: $.ui.cookie (above)
+ * @dependancies: UI Layout 1.8.2 or higher
+ * @dependancies: Persist.js
  *
  * @support: http://groups.google.com/group/jquery-ui-layout
  */
@@ -48,65 +48,11 @@
 
 if (!$.layout) return;
 
-
-/*
- *	GENERIC COOKIE/DATA MANAGEMENT
- *
- *	A $.cookie OR $.ui.cookie namespace *should be* standard.
- *	Until this is standard, I'll create my own $.ui.cookie methods!
- */
-$.ui.cookie = {
-
-	// TODO: is the cookieEnabled property fully cross-browser???
-	acceptsCookies: !!navigator.cookieEnabled
-
-,	read: function (name) {
-		var
-			c		= document.cookie
-		,	cs		= c ? c.split(';') : []
-		,	pair	// loop var
-		;
-		for (var i=0, n=cs.length; i < n; i++) {
-			pair = String.prototype.trim.call(cs[i]).split('='); // name=value pair
-			if (pair[0] == name) // found the layout cookie
-				return decodeURIComponent(pair[1]);
-		}
-		return "";
-	}
-
-,	write: function (name, val, cookieOpts) {
-		var
-			params	= ''
-		,	date	= ''
-		,	clear	= false
-		,	o		= cookieOpts || {}
-		;
-		if (!o.expires) ; // skip
-		else if (o.expires.toUTCString)
-			date = o.expires;
-		else if (typeof o.expires == 'number') {
-			date = new Date();
-			if (o.expires > 0)
-				date.setDate(date.getDate() + o.expires);
-			else {
-				date.setYear(1970);
-				clear = true;
-			}
-		}
-		if (date)		params += ';expires='+ date.toUTCString();
-		if (o.path)		params += ';path='+ o.path;
-		if (o.domain)	params += ';domain='+ o.domain;
-		if (o.secure)	params += ';secure';
-		document.cookie = name +'='+ (clear ? "" : encodeURIComponent( val )) + params; // write or clear cookie
-	}
-
-,	clear: function (name) {
-		$.ui.cookie.write(name, '', {expires: -1});
-	}
-
-};
-
-
+/**
+Persist-JS
+*/
+(function(){if(window.google&&google.gears){return}var a=null;if(typeof GearsFactory!="undefined"){a=new GearsFactory()}else{try{a=new ActiveXObject("Gears.Factory");if(a.getBuildInfo().indexOf("ie_mobile")!=-1){a.privateSetGlobalObject(this)}}catch(b){if((typeof navigator.mimeTypes!="undefined")&&navigator.mimeTypes["application/x-googlegears"]){a=document.createElement("object");a.style.display="none";a.width=0;a.height=0;a.type="application/x-googlegears";document.documentElement.appendChild(a)}}}if(!a){return}if(!window.google){google={}}if(!google.gears){google.gears={factory:a}}})();Persist=(function(){var i="0.3.1",d,b,g,h,e,f;f=(function(){var q="Thu, 01-Jan-1970 00:00:01 GMT",k=1000*60*60*24,r=["expires","path","domain"],m=escape,l=unescape,p=document,n;var s=function(){var t=new Date();t.setTime(t.getTime());return t};var j=function(x,A){var w,v,z,y=[],u=(arguments.length>2)?arguments[2]:{};y.push(m(x)+"="+m(A));for(var t=0;t<r.length;t++){v=r[t];z=u[v];if(z){y.push(v+"="+z)}}if(u.secure){y.push("secure")}return y.join("; ")};var o=function(){return navigator.cookieEnabled};n={set:function(B,x){var u=(arguments.length>2)?arguments[2]:{},v=s(),A,z={};if(u.expires){if(u.expires==-1){z.expires=-1}else{var w=u.expires*k;z.expires=new Date(v.getTime()+w);z.expires=z.expires.toGMTString()}}var C=["path","domain","secure"];for(var y=0;y<C.length;y++){if(u[C[y]]){z[C[y]]=u[C[y]]}}var t=j(B,x,z);p.cookie=t;return x},has:function(u){u=m(u);var x=p.cookie,w=x.indexOf(u+"="),t=w+u.length+1,v=x.substring(0,u.length);return((!w&&u!=v)||w<0)?false:true},get:function(v){v=m(v);var y=p.cookie,x=y.indexOf(v+"="),t=x+v.length+1,w=y.substring(0,v.length),u;if((!x&&v!=w)||x<0){return null}u=y.indexOf(";",t);if(u<0){u=y.length}return l(y.substring(t,u))},remove:function(t){var v=n.get(t),u={expires:q};p.cookie=j(t,"",u);return v},keys:function(){var y=p.cookie,x=y.split("; "),u,w,v=[];for(var t=0;t<x.length;t++){w=x[t].split("=");v.push(l(w[0]))}return v},all:function(){var y=p.cookie,x=y.split("; "),u,w,v=[];for(var t=0;t<x.length;t++){w=x[t].split("=");v.push([l(w[0]),l(w[1])])}return v},version:"0.2.1",enabled:false};n.enabled=o.call(n);return n}());var c=(function(){if(Array.prototype.indexOf){return function(j,k){return Array.prototype.indexOf.call(j,k)}}else{return function(o,p){var n,m;for(var k=0,j=o.length;k<j;k++){if(o[k]==p){return k}}return -1}}})();e=function(){};g=function(j){return"PS"+j.replace(/_/g,"__").replace(/ /g,"_s")};var a={search_order:["localstorage","globalstorage","gears","cookie","ie","flash"],name_re:/^[a-z][a-z0-9_ \-]+$/i,methods:["init","get","set","remove","load","save","iterate"],sql:{version:"1",create:"CREATE TABLE IF NOT EXISTS persist_data (k TEXT UNIQUE NOT NULL PRIMARY KEY, v TEXT NOT NULL)",get:"SELECT v FROM persist_data WHERE k = ?",set:"INSERT INTO persist_data(k, v) VALUES (?, ?)",remove:"DELETE FROM persist_data WHERE k = ?",keys:"SELECT * FROM persist_data"},flash:{div_id:"_persist_flash_wrap",id:"_persist_flash",path:"persist.swf",size:{w:1,h:1},params:{autostart:true}}};b={gears:{size:-1,test:function(){return(window.google&&window.google.gears)?true:false},methods:{init:function(){var j;j=this.db=google.gears.factory.create("beta.database");j.open(g(this.name));j.execute(a.sql.create).close()},get:function(l){var m,n=a.sql.get;var j=this.db;var k;j.execute("BEGIN").close();m=j.execute(n,[l]);k=m.isValidRow()?m.field(0):null;m.close();j.execute("COMMIT").close();return k},set:function(m,p){var k=a.sql.remove,o=a.sql.set,n;var j=this.db;var l;j.execute("BEGIN").close();j.execute(k,[m]).close();j.execute(o,[m,p]).close();j.execute("COMMIT").close();return p},remove:function(l){var n=a.sql.get,p=a.sql.remove,m,o=null,j=false;var k=this.db;k.execute("BEGIN").close();k.execute(p,[l]).close();k.execute("COMMIT").close();return true},iterate:function(m,l){var k=a.sql.keys;var n;var j=this.db;n=j.execute(k);while(n.isValidRow()){m.call(l||this,n.field(0),n.field(1));n.next()}n.close()}}},globalstorage:{size:5*1024*1024,test:function(){if(window.globalStorage){var j="127.0.0.1";if(this.o&&this.o.domain){j=this.o.domain}try{var l=globalStorage[j];return true}catch(k){if(window.console&&window.console.warn){console.warn("globalStorage exists, but couldn't use it because your browser is running on domain:",j)}return false}}else{return false}},methods:{key:function(j){return g(this.name)+g(j)},init:function(){this.store=globalStorage[this.o.domain]},get:function(j){j=this.key(j);return this.store.getItem(j)},set:function(j,k){j=this.key(j);this.store.setItem(j,k);return k},remove:function(j){var k;j=this.key(j);k=this.store.getItem[j];this.store.removeItem(j);return k}}},localstorage:{size:-1,test:function(){try{if(window.localStorage&&window.localStorage.setItem("persistjs_test_local_storage",null)==undefined){window.localStorage.removeItem("persistjs_test_local_storage");if(/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){var k=RegExp.$1;if(k>=9){return true}if(window.location.protocol=="file:"){return false}}else{return true}}else{return false}return window.localStorage?true:false}catch(j){return false}},methods:{key:function(j){return this.name+">"+j},init:function(){this.store=localStorage},get:function(j){j=this.key(j);return this.store.getItem(j)},set:function(j,k){j=this.key(j);this.store.setItem(j,k);return k},remove:function(j){var k;j=this.key(j);k=this.store.getItem(j);this.store.removeItem(j);return k},iterate:function(o,n){var j=this.store,m,p;for(var k=0;k<j.length;k++){m=j.key(k);p=m.split(">");if((p.length==2)&&(p[0]==this.name)){o.call(n||this,p[1],j.getItem(m))}}}}},ie:{prefix:"_persist_data-",size:64*1024,test:function(){return window.ActiveXObject?true:false},make_userdata:function(k){var j=document.createElement("div");j.id=k;j.style.display="none";j.addBehavior("#default#userdata");document.body.appendChild(j);return j},methods:{init:function(){var j=b.ie.prefix+g(this.name);this.el=b.ie.make_userdata(j);if(this.o.defer){this.load()}},get:function(j){var k;j=g(j);if(!this.o.defer){this.load()}k=this.el.getAttribute(j);return k},set:function(j,k){j=g(j);this.el.setAttribute(j,k);if(!this.o.defer){this.save()}return k},remove:function(j){var k;j=g(j);if(!this.o.defer){this.load()}k=this.el.getAttribute(j);this.el.removeAttribute(j);if(!this.o.defer){this.save()}return k},load:function(){this.el.load(g(this.name))},save:function(){this.el.save(g(this.name))}}},cookie:{delim:":",size:4000,test:function(){return d.Cookie.enabled?true:false},methods:{key:function(j){return this.name+b.cookie.delim+j},get:function(j,k){var l;j=this.key(j);l=f.get(j);return l},set:function(j,l,k){j=this.key(j);f.set(j,l,this.o);return l},remove:function(j,k){var k;j=this.key(j);k=f.remove(j);return k}}},flash:{test:function(){try{if(!swfobject){return false}}catch(k){return false}var j=swfobject.getFlashPlayerVersion().major;return(j>=8)?true:false},methods:{init:function(){if(!b.flash.el){var l,m,k,j=a.flash;m=document.createElement("div");m.id=j.div_id;k=document.createElement("div");k.id=j.id;m.appendChild(k);document.body.appendChild(m);b.flash.el=swfobject.createSWF({id:j.id,data:this.o.swf_path||j.path,width:j.size.w,height:j.size.h},j.params,j.id)}this.el=b.flash.el},get:function(j){var k;j=g(j);k=this.el.get(this.name,j);return k},set:function(k,l){var j;k=g(k);j=this.el.set(this.name,k,l);return j},remove:function(j){var k;j=g(j);k=this.el.remove(this.name,j);return k}}}};h=function(){var n,j,p,r,s=a.methods,t=a.search_order;for(var q=0,o=s.length;q<o;q++){d.Store.prototype[s[q]]=e}d.type=null;d.size=-1;for(var m=0,k=t.length;!d.type&&m<k;m++){p=b[t[m]];if(p.test()){d.type=t[m];d.size=p.size;for(r in p.methods){d.Store.prototype[r]=p.methods[r]}}}d._init=true};d={VERSION:i,type:null,size:0,add:function(j){b[j.id]=j;a.search_order=[j.id].concat(a.search_order);h()},remove:function(k){var j=c(a.search_order,k);if(j<0){return}a.search_order.splice(j,1);delete b[k];h()},Cookie:f,Store:function(j,k){if(!a.name_re.exec(j)){throw new Error("Invalid name")}if(!d.type){throw new Error("No suitable storage found")}k=k||{};this.name=j;k.domain=k.domain||location.hostname||"localhost";k.domain=k.domain.replace(/:\d+$/,"");k.domain=(k.domain=="localhost")?"":k.domain;this.o=k;k.expires=k.expires||365*2;k.path=k.path||"/";if(this.o.search_order){a.search_order=this.o.search_order;h()}this.init()}};h();return d})();
+var layoutStore = new Persist.Store("LayoutProperties");
 // tell Layout that the state plugin is available
 $.layout.plugins.stateManagement = true;
 
@@ -119,12 +65,9 @@ $.layout.defaults.stateManagement = {
 ,	stateKeys:	"north.size,south.size,east.size,west.size,"+
 				"north.isClosed,south.isClosed,east.isClosed,west.isClosed,"+
 				"north.isHidden,south.isHidden,east.isHidden,west.isHidden"
+    , storeLocation: 'localstorage' //or globalStorage or sessionStorage or cookie or flash or
 ,	cookie: {
-		name:	""	// If not specified, will use Layout.name, else just "Layout"
-	,	domain:	""	// blank = current domain
-	,	path:	""	// blank = current page, '/' = entire website
-	,	expires: ""	// 'days' to keep cookie - leave blank for 'session cookie'
-	,	secure:	false
+		name:	""	// If not specified, will use Layout.name, else just "Layout". Now the Store Name
 	}
 };
 // Set stateManagement as a layout-option, NOT a pane-option
@@ -149,12 +92,14 @@ $.layout.state = {
 	 * @param {Object=}			opts
 	 */
 ,	saveCookie: function (inst, keys, cookieOpts) {
-		var o	= inst.options
+        var o	= inst.options
 		,	oS	= o.stateManagement
 		,	oC	= $.extend( {}, oS.cookie, cookieOpts || {} )
 		,	data = inst.state.stateData = inst.readState( keys || oS.stateKeys ) // read current panes-state
 		;
-		$.ui.cookie.write( oC.name || o.name || "Layout", $.layout.state.encodeJSON(data), oC );
+        var storeName = oC.name || o.name || "Layout";
+        layoutStore.set(storeName,JSON.stringify(data));
+        layoutStore.save();
 		return $.extend( {}, data ); // return COPY of state.stateData data
 	}
 
@@ -165,7 +110,7 @@ $.layout.state = {
 	 */
 ,	deleteCookie: function (inst) {
 		var o = inst.options;
-		$.ui.cookie.clear( o.stateManagement.cookie.name || o.name || "Layout" );
+        layoutStore.remove( o.stateManagement.cookie.name || o.name || "Layout");
 	}
 
 	/**
@@ -175,9 +120,9 @@ $.layout.state = {
 	 */
 ,	readCookie: function (inst) {
 		var o = inst.options;
-		var c = $.ui.cookie.read( o.stateManagement.cookie.name || o.name || "Layout" );
+		var c = layoutStore.get(o.stateManagement.cookie.name || o.name || "Layout");
 		// convert cookie string back to a hash and return it
-		return c ? $.layout.state.decodeJSON(c) : {};
+		return c ? JSON.parse(c): {};
 	}
 
 	/**
@@ -237,7 +182,7 @@ $.layout.state = {
 		,	pair, pane, key, val
 		;
 		if (!keys) keys = inst.options.stateManagement.stateKeys; // if called by user
-		if ($.isArray(keys)) keys = keys.join(",");
+		if (Array.isArray(keys)) keys = keys.join(",");
 		// convert keys to an array and change delimiters from '__' to '.'
 		keys = keys.replace(/__/g, ".").split(',');
 		// loop keys and create a data hash
@@ -254,39 +199,6 @@ $.layout.state = {
 		}
 		return data;
 	}
-
-	/**
-	 *	Stringify a JSON hash so can save in a cookie or db-field
-	 */
-,	encodeJSON: function (JSON) {
-		var native = window.JSON || {};
-		return (native.stringify || stringify)(JSON);
-
-		function stringify (h) {
-			var D=[], i=0, k, v, t; // k = key, v = value
-			for (k in h) {
-				v = h[k];
-				t = typeof v;
-				if (t == 'string')		// STRING - add quotes
-					v = '"'+ v +'"';
-				else if (t == 'object')	// SUB-KEY - recurse into it
-					v = parse(v);
-				D[i++] = '"'+ k +'":'+ v;
-			}
-			return '{'+ D.join(',') +'}';
-		};
-	}
-
-	/**
-	 *	Convert stringified JSON back to a hash object
-	 *	@see		$.parseJSON(), adding in jQuery 1.4.1
-	 */
-,	decodeJSON: function (str) {
-		try { return $.parseJSON ? $.parseJSON(str) : window["eval"]("("+ str +")") || {}; }
-		catch (e) { return {}; }
-	}
-
-
 ,	_create: function (inst) {
 		//	ADD State-Management plugin methods to inst
 		 $.extend( inst, {
@@ -302,9 +214,6 @@ $.layout.state = {
 		,	loadState:		function (stateData, animate) { $.layout.state.loadState(inst, stateData, animate); }
 		//	readState - returns hash of current layout-state
 		,	readState:		function (keys) { return $.layout.state.readState(inst, keys); }
-		//	add JSON utility methods too...
-		,	encodeJSON:		$.layout.state.encodeJSON
-		,	decodeJSON:		$.layout.state.decodeJSON
 		});
 
 		// init state.stateData key, even if plugin is initially disabled
@@ -329,7 +238,6 @@ $.layout.state = {
 				inst.state.stateData = inst.readState();
 		}
 	}
-
 };
 
 // add state initialization method to Layout's onCreate array of functions
